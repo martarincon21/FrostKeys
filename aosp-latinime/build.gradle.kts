@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.Copy
+
 plugins {
     id("com.android.library")
 }
@@ -19,7 +21,13 @@ android {
                     rootProject.file("aosp/LatinIME/common/src"),
                 ),
             )
-            res.setSrcDirs(listOf(rootProject.file("aosp/LatinIME/java/res")))
+            res.setSrcDirs(
+                listOf(
+                    rootProject.file("aosp/LatinIME/java/res"),
+                    file("src/main/res"),
+                    layout.buildDirectory.dir("generated/aosp-res").get().asFile,
+                ),
+            )
         }
     }
 
@@ -27,6 +35,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+val generateAospImeMethod by tasks.registering(Copy::class) {
+    from(rootProject.file("aosp/LatinIME/java/res/xml/method.xml"))
+    into(layout.buildDirectory.dir("generated/aosp-res/xml"))
+    rename { "aosp_method.xml" }
+}
+
+tasks.named("preBuild").configure {
+    dependsOn(generateAospImeMethod)
 }
 
 dependencies {

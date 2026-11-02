@@ -41,6 +41,17 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             <meta-data android:name="android.view.im" android:resource="@xml/method" />
         </service>
 
+        <service android:name="com.android.inputmethod.latin.LatinIME"
+                android:label="@string/aosp_ime_name"
+                android:permission="android.permission.BIND_INPUT_METHOD"
+                android:directBootAware="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data android:name="android.view.im" android:resource="@xml/aosp_method" />
+        </service>
+
         <service android:name=".spellcheck.AndroidSpellCheckerService"
                  android:label="@string/spell_checker_service_name"
                  android:permission="android.permission.BIND_TEXT_SERVICE"
@@ -61,6 +72,15 @@ SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.android.inputmethod.latin.settings.SettingsActivity"
+                android:theme="@style/platformSettingsTheme"
+                android:label="@string/english_ime_settings"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 

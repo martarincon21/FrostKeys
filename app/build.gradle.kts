@@ -74,6 +74,7 @@ android {
             isShrinkResources = false
             isDebuggable = false
             isJniDebuggable = false
+            matchingFallbacks += listOf("release")
         }
         debug {
             // "normal" debug has minify for smaller APK to fit the GitHub 25 MB limit when zipped
@@ -86,6 +87,7 @@ android {
         create("runTests") { // build variant for running tests on CI that skips tests known to fail
             isMinifyEnabled = false
             isJniDebuggable = false
+            matchingFallbacks += listOf("debug")
         }
         create("debugNoMinify") { // for faster builds in IDE
             isDebuggable = true
@@ -94,6 +96,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             applicationIdSuffix = ".debug"
             manifestPlaceholders["stickerProviderAuthority"] = "${defaultConfig.applicationId}.debug.stickercontentprovider"
+            matchingFallbacks += listOf("debug")
         }
 
         androidComponents.onVariants { variant: ApplicationVariant ->
