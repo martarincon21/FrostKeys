@@ -169,6 +169,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":aosp-latinime"))
+
     // androidx
     implementation("androidx.core:core-ktx:1.17.0") // 1.18.0 requires minSdk 23
     implementation("androidx.appcompat:appcompat:1.7.0")
