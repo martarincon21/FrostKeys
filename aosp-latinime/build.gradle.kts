@@ -31,5 +31,6 @@ android {
 
 dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.core:core:1.17.0")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
 }
